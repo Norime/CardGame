@@ -1,0 +1,51 @@
+<button id="ajaxButton" type="button">Faire une requête</button>
+
+<script>
+
+var tableau = new Array();
+
+(function() {
+  var httpRequest;
+  document.getElementById("ajaxButton").addEventListener('click', makeRequest);
+
+  function makeRequest() {
+    httpRequest = new XMLHttpRequest();
+
+    if (!httpRequest) {
+      alert('Abandon :( Impossible de créer une instance de XMLHTTP');
+      return false;
+    }
+    httpRequest.onreadystatechange = alertContents;
+    httpRequest.open('GET', 'test.php');
+    httpRequest.send();
+  }
+
+  function alertContents() {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+          alert(httpRequest.responseText);
+          extraireToken(httpRequest.responseText);
+          //console.log(tableau);
+      } else {
+        alert('Il y a eu un problème avec la requête.');
+      }
+    }
+  }
+    })();
+
+    function extraireToken(ligne) { /////////////////////////////////////////////////////////////////////////////////////////////////////
+        var mot = "";
+        //console.log(ligne[0]);
+        //console.log(ligne);
+        //console.log(ligne.length);
+
+        for (var i = 0; i < ligne.length; i++) {
+
+            if (((ligne[i] == '\n') || (ligne[i] == '\r')) && ((ligne[i + 1] != '\n') && (ligne[i + 1] != '\r'))) { tableau.push(mot); mot = ""; }
+            else if (ligne[i] == ";") {tableau.push(mot); mot = ""; return;}
+            else if (ligne[i] != "," && ligne[i] != ";" && ligne[i] != "\n" && ligne[i] != "\r") { mot = mot + ligne[i]; }
+
+        }
+    } //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+</script>
