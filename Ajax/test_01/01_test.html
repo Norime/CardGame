@@ -1,0 +1,51 @@
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"> 
+<style type="text/css">
+  div { width: 400px; height: 300px; float: left; margin: 5px; }
+  #premier { background-color: #F6E497; }
+  #troisieme { background-color: #CAF1EC; }
+  #quatrieme { background-color: #F1DBCA; }
+</style>
+<button id="majPremier">Mise à jour première zone</button>
+<button id="majDeuxieme">Mise à jour deuxième zone</button><br /><br />
+<div id="premier">
+ à Le texte du premier div. Le texte du premier div. Le texte du premier div. Le texte du premier div. Le texte du premier div. 
+  Le texte du premier div. Le texte du premier div. Le texte du premier div. Le texte du premier div. Le texte du premier div. 
+</div>
+<div id="deuxieme">
+  <img src="binagraphe.jpg">
+</div>
+<div id="troisieme">
+  Le texte du troisième div. Le texte du troisième div. Le texte du troisième div. Le texte du troisième div. Le texte du troisième div.
+   Le texte du troisième div. Le texte du troisième div. Le texte du troisième div. Le texte du troisième div. Le texte du troisième div.
+</div>
+<div id="quatrieme">
+   Le texte du quatrième div. Le texte du quatrième div. Le texte du quatrième div. Le texte du quatrième div. Le texte du quatrième div.
+    Le texte du quatrième div. Le texte du quatrième div. Le texte du quatrième div. Le texte du quatrième div. Le texte du quatrième div.
+</div>
+<script src="jquery-3.1.1.js"></script>
+<script>
+  $(function() {
+
+    $('#majPremier').click(function() {
+
+      $('#premier').load('maj1.html', function() {
+
+        alert('La première zone a été mise à jour');
+
+      });
+
+    });
+
+
+    $('#majDeuxieme').click(function() {
+
+      $('#deuxieme').load('maj2.html', function() {
+
+        alert('La deuxième zone a été mise à jour');
+
+      });
+
+    });
+
+  });
+</script>

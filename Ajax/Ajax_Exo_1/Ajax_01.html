@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>AJAX-01</title>
+<style>
+body	{	font-family	:	Arial	;
+		}
+</style>
+<script>
+//----------------------------------------------------------------
+function getXMLHttpRequest() 
+// retrouver et renvoyer l'objet XMLHttpRequest 
+// qui correspond au navigateur en cours
+{
+    var xhr = null;
+
+    if (window.XMLHttpRequest || window.ActiveXObject) {
+        if (window.ActiveXObject) {
+            try {
+                xhr = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch(e) {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+        } else {
+            xhr = new XMLHttpRequest(); 
+        }
+    } else {
+        alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
+        return null;
+    }
+
+    return xhr;
+}//----------------------------------------------------------------
+
+var  xhr = getXMLHttpRequest();		// définir l'objet
+
+xhr.onreadystatechange = function() 
+// évenement déclenché lors de la réception de la réponse
+{
+  if (xhr.readyState==4 && (xhr.status==200 || xhr.status == 0)) 
+  {
+	//alert(xhr.responseText); // Données textuelles récupérées
+	resultat = "" ;
+	
+	for(var i = 0 ; i < xhr.responseText.length ; i++ )
+		resultat += xhr.responseText[i] + ' ';
+		
+	alert ( resultat ) ;
+  }
+};
+//----------------------------------------------------------------
+
+function	envoyerRequete ()
+{
+	if ( ! xhr )	return;		// PB !
+	
+var sVar1 = encodeURIComponent("contenu avec des espaces");
+var sVar2 = encodeURIComponent("je vois que vous êtes un bon élève... oopa !");
+	xhr.open("GET", "prog1.php?variable1=" + sVar1 + "&variable2= " + sVar2, true);
+	xhr.send(null);
+}
+
+</script>
+</head>
+<body>
+<h1>Ajax Exo-1b</h1>
+<hr>
+<button onclick='envoyerRequete()'>Envoyer 1</button>
+</body>
+</html>
