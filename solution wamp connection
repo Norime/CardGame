@@ -1,0 +1,40 @@
+dans le phpmyadmin.conf:
+
+Alias /phpmyadmin "c:/wamp64/apps/phpmyadmin4.8.5/"
+
+<Directory "c:/wamp64/apps/phpmyadmin4.8.5/">
+	Options +Indexes +FollowSymLinks +MultiViews
+  AllowOverride all
+  <ifDefine APACHE24>
+		Require all granted
+	</ifDefine>
+	<ifDefine !APACHE24>
+		Order Deny,Allow
+    Deny from all
+    Allow from localhost ::1 127.0.0.1
+	Allow from 172.16.0.0/12
+	#require method post
+	</ifDefine>
+
+# To import big file you can increase values
+  php_admin_value upload_max_filesize 128M
+  php_admin_value post_max_size 128M
+  php_admin_value max_execution_time 360
+  php_admin_value max_input_time 360
+</Directory>
+
+dans le httpd-vhosts.conf:
+
+# Virtual Hosts
+#
+<VirtualHost *:80>
+  ServerName localhost
+  ServerAlias localhost
+  DocumentRoot "${INSTALL_DIR}/www"
+  <Directory "${INSTALL_DIR}/www/">
+    Options +Indexes +Includes +FollowSymLinks +MultiViews
+    AllowOverride All
+    Require all granted
+  </Directory>
+</VirtualHost>
+
